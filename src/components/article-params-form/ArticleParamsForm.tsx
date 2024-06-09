@@ -17,7 +17,11 @@ import { Text } from 'components/text';
 
 import styles from './ArticleParamsForm.module.scss';
 
-export const ArticleParamsForm = () => {
+type TProps = {
+	onApply: (fontClass: string) => void;
+};
+
+export const ArticleParamsForm = (props: TProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggleForm = () => {
 		setIsOpen(!isOpen);
@@ -32,6 +36,12 @@ export const ArticleParamsForm = () => {
 	const [widthContent, serWidthContent] = useState<OptionType>(
 		contentWidthArr[0]
 	);
+
+	const apply = () => {
+		console.log('apply click', font.className);
+		setIsOpen(false);
+		props.onApply(font.className);
+	};
 
 	return (
 		<>
@@ -77,7 +87,7 @@ export const ArticleParamsForm = () => {
 					/>
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' type='reset' />
-						<Button title='Применить' type='submit' />
+						<Button title='Применить' type='button' onClick={apply} />
 					</div>
 				</form>
 			</aside>
