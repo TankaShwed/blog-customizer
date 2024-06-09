@@ -18,11 +18,13 @@ import { Text } from 'components/text';
 import styles from './ArticleParamsForm.module.scss';
 
 type TProps = {
-	onApply: (fontClass: string,
+	onApply: (
+		fontClass: string,
 		fontSize: string,
 		fontColor: string,
 		backgroundColor: string,
-		widthContent: string ) => void
+		widthContent: string
+	) => void;
 };
 
 export const ArticleParamsForm = (props: TProps) => {
@@ -42,9 +44,22 @@ export const ArticleParamsForm = (props: TProps) => {
 	);
 
 	const apply = () => {
-		console.log('apply click', font.className);
 		setIsOpen(false);
-		props.onApply(font.value, fontSize.value, fontColor.value, backgroundColor.value, widthContent.value);
+		props.onApply(
+			font.value,
+			fontSize.value,
+			fontColor.value,
+			backgroundColor.value,
+			widthContent.value
+		);
+	};
+
+	const reset = () => {
+		setFont(fontFamilyOptions[0]);
+		setFontSize(fontSizeOptions[0]);
+		setFontColor(fontColors[0]);
+		setBackgroundColor(backgroundColors[0]);
+		serWidthContent(contentWidthArr[0]);
 	};
 
 	return (
@@ -90,7 +105,7 @@ export const ArticleParamsForm = (props: TProps) => {
 						title='ширина контента'
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' />
+						<Button title='Сбросить' type='reset' onClick={reset} />
 						<Button title='Применить' type='button' onClick={apply} />
 					</div>
 				</form>

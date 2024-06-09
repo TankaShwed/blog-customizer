@@ -34,7 +34,6 @@ const App = () => {
 	);
 
 	const onSettingsChange = (fontValue: string, sizeValue: string, fontColorValue: string, bgColorValue: string, widthValue: string) => {
-		console.log('noga', sizeValue);
 		setFontFamily(fontValue);
 		setFontSize(sizeValue);
 		setFontColor(fontColorValue);
