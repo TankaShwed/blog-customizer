@@ -18,7 +18,11 @@ import { Text } from 'components/text';
 import styles from './ArticleParamsForm.module.scss';
 
 type TProps = {
-	onApply: (fontClass: string) => void;
+	onApply: (fontClass: string,
+		fontSize: string,
+		fontColor: string,
+		backgroundColor: string,
+		widthContent: string ) => void
 };
 
 export const ArticleParamsForm = (props: TProps) => {
@@ -40,7 +44,7 @@ export const ArticleParamsForm = (props: TProps) => {
 	const apply = () => {
 		console.log('apply click', font.className);
 		setIsOpen(false);
-		props.onApply(font.className);
+		props.onApply(font.value, fontSize.value, fontColor.value, backgroundColor.value, widthContent.value);
 	};
 
 	return (

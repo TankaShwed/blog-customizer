@@ -17,9 +17,29 @@ const App = () => {
 		defaultArticleState.fontFamilyOption.value
 	);
 
-	const onSettingsChange = (fontClass: string) => {
-		console.log('noga', fontClass);
-		setFontFamily(fontClass);
+	const [fontSize, setFontSize] = useState<string>(
+		defaultArticleState.fontSizeOption.value
+	);
+
+	const [fontColor, setFontColor] = useState<string>(
+		defaultArticleState.fontColor.value,
+	);
+
+	const [backgroundColor, setBackGroundColor] = useState<string>(
+		defaultArticleState.backgroundColor.value
+	);
+
+	const [widthContent, setWidthContent] = useState<string>(
+		defaultArticleState.contentWidth.value
+	);
+
+	const onSettingsChange = (fontValue: string, sizeValue: string, fontColorValue: string, bgColorValue: string, widthValue: string) => {
+		console.log('noga', sizeValue);
+		setFontFamily(fontValue);
+		setFontSize(sizeValue);
+		setFontColor(fontColorValue);
+		setBackGroundColor(bgColorValue);
+		setWidthContent(widthValue);
 	};
 
 	return (
@@ -28,10 +48,10 @@ const App = () => {
 			style={
 				{
 					'--font-family': fontFamily,
-					'--font-size': defaultArticleState.fontSizeOption.value,
-					'--font-color': defaultArticleState.fontColor.value,
-					'--container-width': defaultArticleState.contentWidth.value,
-					'--bg-color': defaultArticleState.backgroundColor.value,
+					'--font-size': fontSize,
+					'--font-color':fontColor,
+					'--container-width': widthContent,
+					'--bg-color': backgroundColor,
 				} as CSSProperties
 			}>
 			<ArticleParamsForm onApply={onSettingsChange} />
