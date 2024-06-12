@@ -28,9 +28,9 @@ type TProps = {
 };
 
 export const ArticleParamsForm = (props: TProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); //djeneric?
 	const toggleForm = () => {
-		setIsOpen(!isOpen);
+		setIsMenuOpen(!isMenuOpen);
 	};
 
 	const [font, setFont] = useState<OptionType>(fontFamilyOptions[0]);
@@ -44,7 +44,7 @@ export const ArticleParamsForm = (props: TProps) => {
 	);
 
 	const apply = () => {
-		setIsOpen(false);
+		setIsMenuOpen(false);
 		props.onApply(
 			font.value,
 			fontSize.value,
@@ -62,12 +62,16 @@ export const ArticleParamsForm = (props: TProps) => {
 		serWidthContent(contentWidthArr[0]);
 	};
 
+	const overlayClick = () => {
+		setIsMenuOpen(false);
+	}
+
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} toggleForm={toggleForm} />
+			<ArrowButton isOpen={isMenuOpen} toggleForm={toggleForm} />
 
 			<aside
-				className={clsx(styles.container, { [styles.container_open]: isOpen })}>
+				className={clsx(styles.container, { [styles.container_open]: isMenuOpen })}>
 				<form className={styles.form}>
 					<Text as='h3' size={31} weight={800} uppercase dynamicLite>
 						Задайте параметры
@@ -110,6 +114,7 @@ export const ArticleParamsForm = (props: TProps) => {
 					</div>
 				</form>
 			</aside>
+			{isMenuOpen && <div className={styles.overlay} onClick={overlayClick}/>}
 		</>
 	);
 };
