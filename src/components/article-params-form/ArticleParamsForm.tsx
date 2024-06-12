@@ -5,6 +5,7 @@ import { useState } from 'react';
 import {
 	backgroundColors,
 	contentWidthArr,
+	defaultArticleState,
 	fontColors,
 	fontFamilyOptions,
 	fontSizeOptions,
@@ -27,20 +28,28 @@ type TProps = {
 	) => void;
 };
 
+const Spacing = () => <div className={styles.spacing} />;
+
 export const ArticleParamsForm = (props: TProps) => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false); //djeneric?
 	const toggleForm = () => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	const [font, setFont] = useState<OptionType>(fontFamilyOptions[0]);
-	const [fontSize, setFontSize] = useState<OptionType>(fontSizeOptions[0]);
-	const [fontColor, setFontColor] = useState<OptionType>(fontColors[0]);
+	const [font, setFont] = useState<OptionType>(
+		defaultArticleState.fontFamilyOption
+	);
+	const [fontSize, setFontSize] = useState<OptionType>(
+		defaultArticleState.fontSizeOption
+	);
+	const [fontColor, setFontColor] = useState<OptionType>(
+		defaultArticleState.fontColor
+	);
 	const [backgroundColor, setBackgroundColor] = useState<OptionType>(
-		backgroundColors[0]
+		defaultArticleState.backgroundColor
 	);
 	const [widthContent, serWidthContent] = useState<OptionType>(
-		contentWidthArr[0]
+		defaultArticleState.contentWidth
 	);
 
 	const apply = () => {
@@ -55,33 +64,37 @@ export const ArticleParamsForm = (props: TProps) => {
 	};
 
 	const reset = () => {
-		setFont(fontFamilyOptions[0]);
-		setFontSize(fontSizeOptions[0]);
-		setFontColor(fontColors[0]);
-		setBackgroundColor(backgroundColors[0]);
-		serWidthContent(contentWidthArr[0]);
+		setFont(defaultArticleState.fontFamilyOption);
+		setFontSize(defaultArticleState.fontSizeOption);
+		setFontColor(defaultArticleState.fontColor);
+		setBackgroundColor(defaultArticleState.backgroundColor);
+		serWidthContent(defaultArticleState.contentWidth);
 	};
 
 	const overlayClick = () => {
 		setIsMenuOpen(false);
-	}
+	};
 
 	return (
 		<>
 			<ArrowButton isOpen={isMenuOpen} toggleForm={toggleForm} />
 
 			<aside
-				className={clsx(styles.container, { [styles.container_open]: isMenuOpen })}>
+				className={clsx(styles.container, {
+					[styles.container_open]: isMenuOpen,
+				})}>
 				<form className={styles.form}>
 					<Text as='h3' size={31} weight={800} uppercase dynamicLite>
 						Задайте параметры
 					</Text>
+					<Spacing />
 					<Select
 						selected={font}
 						options={fontFamilyOptions}
 						onChange={setFont}
 						title='шрифт'
 					/>
+					<Spacing />
 					<RadioGroup
 						name=''
 						options={fontSizeOptions}
@@ -89,19 +102,23 @@ export const ArticleParamsForm = (props: TProps) => {
 						onChange={setFontSize}
 						title={'размер шрифта'}
 					/>
+					<Spacing />
 					<Select
 						selected={fontColor}
 						options={fontColors}
 						onChange={setFontColor}
 						title='цвет шрифта'
 					/>
+					<Spacing />
 					<Separator />
+					<Spacing />
 					<Select
 						selected={backgroundColor}
 						options={backgroundColors}
 						onChange={setBackgroundColor}
 						title='цвет фона'
 					/>
+					<Spacing />
 					<Select
 						selected={widthContent}
 						options={contentWidthArr}
@@ -114,7 +131,7 @@ export const ArticleParamsForm = (props: TProps) => {
 					</div>
 				</form>
 			</aside>
-			{isMenuOpen && <div className={styles.overlay} onClick={overlayClick}/>}
+			{isMenuOpen && <div className={styles.overlay} onClick={overlayClick} />}
 		</>
 	);
 };
