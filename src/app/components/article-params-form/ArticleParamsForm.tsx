@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { ArrowButton } from 'components/arrow-button';
-import { Button } from 'components/button';
+import { ArrowButton } from 'src/app/components/arrow-button';
+import { Button } from 'src/app/components/button';
 import { useState } from 'react';
 import {
 	backgroundColors,
@@ -10,11 +10,11 @@ import {
 	fontFamilyOptions,
 	fontSizeOptions,
 	OptionType,
-} from 'src/constants/articleProps';
+} from 'src/app/constants/articleProps';
 import { RadioGroup } from '../radio-group';
 import { Select } from '../select';
 import { Separator } from '../separator';
-import { Text } from 'components/text';
+import { Text } from 'src/app/components/text';
 
 import styles from './ArticleParamsForm.module.scss';
 
