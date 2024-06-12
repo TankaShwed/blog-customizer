@@ -11,6 +11,7 @@
 	background-color: #000000;
 	border-right: 1px;
 	transition: transform 0.5s ease;
+	z-index: 1;
 }
 
 .container_open {
@@ -28,3 +29,13 @@
 .arrow_open {
 	transform: rotate(0deg);
 }
+
+.container:hover {
+	background: var(--sunny, #FFC802);
+	cursor: pointer;
+}
+
+
+//.selectWrapper[data-is-active='true'] .placeholder {
+// 	outline: 3px solid #000000;
+// }
